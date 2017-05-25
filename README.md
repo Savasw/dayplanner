@@ -3,7 +3,7 @@
 ## Introduction
 Get hands-on and learn how to build and deploy PostgreSQL Database Services and Node.JS appplication on Azure.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FClick2Cloud%2Fpostgres-nodejs-app%2Fmaster%2Fdeploy%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsavasw%2Fdayplanner%2Fmaster%2Fdeploy%2Fazuredeploy.json" target="_blank">
       <img src="http://azuredeploy.net/deploybutton.png"/>
  </a>
 
