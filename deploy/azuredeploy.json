@@ -6,7 +6,8 @@
     "serverName": "[concat('postgresql', uniqueString(resourceGroup().id))]",
     "databaseName": "dayplanner",
     "hostingPlanName": "[concat(variables('webSiteName'),'-plan')]",
-    "searchServiceName": "[concat('gis-service', uniqueString(resourceGroup().id))]"
+    "searchServiceName": "[concat('gis-service', uniqueString(resourceGroup().id))]",
+    "skuNamePG": "PGSQLS3M100"
   },
   "parameters": {
     "appServicePlan": {
@@ -32,7 +33,7 @@
     },
     "repoUrl": {
       "type": "string",
-      "defaultValue": "https://github.com/Click2Cloud/postgres-nodejs-app.git",
+      "defaultValue": "https://github.com/savasw/dayplanner.git",
       "metadata": {
         "description": "The URL for the GitHub repository that contains the project to deploy."
       }
@@ -140,6 +141,7 @@
       "name": "[variables('serverName')]",
       "type": "Microsoft.DBforPostgreSQL/servers",
       "sku": {
+        "name": "[variables('skuNamePG')]",
         "tier": "[parameters('postgresServiceTier')]",
         "capacity": "[parameters('postgresComputeUnit')]",
         "size": "[mul(parameters('postgresStorageGB'), 1024)]"
@@ -316,6 +318,7 @@
               "displayName": "WebAppSettings"
           },
           "properties": {
+              "WEBSITE_NODE_DEFAULT_VERSION": "6.9.1",
               "searchServicePrimaryKey": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceName')), '2015-08-19').primaryKey]",
               "searchServiceUri": "[concat('https://', variables('searchServiceName'), '.search.windows.net')]"
           }
@@ -325,7 +328,9 @@
           "name": "web",
           "type": "sourcecontrols",
           "dependsOn": [
-            "[resourceId('Microsoft.Web/Sites/', variables('webSiteName'))]"
+            "[resourceId('Microsoft.Web/Sites/', variables('webSiteName'))]",
+            "[resourceId('Microsoft.Web/Sites/config', variables('webSiteName'), 'appsettings')]",
+            "[resourceId('Microsoft.Web/Sites/config', variables('webSiteName'), 'connectionstrings')]"
           ],
           "properties": {
             "RepoUrl": "[parameters('repoUrl')]",
