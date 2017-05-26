@@ -74,7 +74,7 @@
       "type": "int",
       "defaultValue": 50,
       "metadata": {
-        "description": "The PostgreSQL database storage size to use. For 'Basic' tier, maximum value is 1050 and for 'Standard' tier, maximum value is 10000 (Can be increased by 125 GB)"
+        "description": "The PostgreSQL database storage size to use. For 'Basic' tier, min value is 50 and max value is 1050 and for 'Standard' tier, min value is 125 and max value is 10000 (Can be increased by 125 GB)"
       }
     },
     "postgresAdministratorLogin": {
